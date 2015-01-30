@@ -63,6 +63,19 @@ public class ProductService {
         }
 
     }
+    
+    public void DeleteProduct(long prodID) {
+        try {
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            Query q = em.createQuery("DELETE FROM Product p WHERE p.id = :id");
+            q.setParameter("id", prodID);
+            q.executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
 
 }
 
